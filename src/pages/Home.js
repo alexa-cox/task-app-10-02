@@ -25,23 +25,19 @@ import TodoList from '../components/TodoList';
 */
 function Home() {
   return (
-    <div className="App">
-      <TodoList title="My Active List"
-                showNewButton={true}
-                completed={false}
-                items={[
-                  'Do Laundry',
-                  'Clean Room'
-                ]}
-                />
-      <TodoList title="Completed List"
-                showNewButton={false}
-                completed={true}
-                items={[
-                  'Take Out Trash',
-                  'Make Dinner'
-                ]}
-                />
+    <div className='App'>
+      <TodoList
+        title='My Active List'
+        showNewButton={true}
+        completed={false}
+        items={['Do Laundry', 'Clean Room']}
+      />
+      <TodoList
+        title='Completed List'
+        showNewButton={false}
+        completed={true}
+        items={['Take Out Trash', 'Make Dinner']}
+      />
     </div>
   );
 }
@@ -58,12 +54,9 @@ TodoList(props);
 
 export default Home;
 
+// function sayName(name) {
+//   console.log('my name is', name);
+// }
 
-
-
-function sayName(name) {
-  console.log('my name is', name);
-}
-
-sayName('Nas');
-sayName('Mary')
+// sayName('Nas');
+// sayName('Mary')
