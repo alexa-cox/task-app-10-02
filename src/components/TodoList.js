@@ -21,13 +21,26 @@ function TodoList(data) {
 
   const showItems = () => {
     // loop over items, and return an array of JSX
-    let strikeThroughClass = '';
+    let completedClass = '';
+    let checkClass = '';
+    let isChecked = false;
     if (data.completed) {
-      strikeThroughClass = 'text-decoration-line-through';
+      completedClass = 'text-muted';
+      isChecked = true;
+      checkClass = 'bg-secondary border-secondary';
     }
 
     const jsxItems = data.items.map(function (item) {
-      return <li className={strikeThroughClass}>{item}</li>;
+      return (
+        <li className={`${completedClass} list-group-item`}>
+          <input
+            className={`${checkClass} form-check-input`}
+            type='checkbox'
+            checked={isChecked}
+          />
+          <span className='ms-3'>{item}</span>
+        </li>
+      );
     });
 
     return jsxItems;
@@ -38,7 +51,7 @@ function TodoList(data) {
       <Card>
         <CardHeader>{data.title}</CardHeader>
         <CardBody>
-          <ul>{showItems()}</ul>
+          <ul className='list-group list-group-flush'>{showItems()}</ul>
         </CardBody>
 
         {showButton()}
