@@ -1,5 +1,5 @@
 import React from 'react';
-import TodoList from '../components/TodoList';
+import TodoList from '../features/todoList/TodoList';
 
 /*
   React Component = Function that returns JSX (JavaScript XML [extensible markup language] )
