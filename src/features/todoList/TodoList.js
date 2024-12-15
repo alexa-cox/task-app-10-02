@@ -1,6 +1,16 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Row, Col, Button, Card, CardHeader, CardBody, CardFooter, Input } from 'reactstrap';
+import {
+  Row,
+  Col,
+  Button,
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+  Input,
+  InputGroup,
+} from 'reactstrap';
 
 /*
   React State Management:
@@ -22,15 +32,14 @@ import { Row, Col, Button, Card, CardHeader, CardBody, CardFooter, Input } from 
 
 // <TodoList items={[]} /> = TodoList();
 function TodoList(data) {
-  const [ addedItem, setAddedItem ] = useState(false);
-  const [ items, setItems ] = useState(data.items);
-  const [ newItem, setNewItem ] = useState();
-  
+  const [addedItem, setAddedItem] = useState(false);
+  const [items, setItems] = useState(data.items);
+  const [newItem, setNewItem] = useState();
+
   const addNewItem = () => {
     setAddedItem(true); // provide updated value as argument
     console.log('Changing addItem to true', addedItem);
-    
-  }
+  };
 
   const showButton = () => {
     if (data.showNewButton) {
@@ -38,7 +47,7 @@ function TodoList(data) {
         <CardFooter>
           <Button
             onClick={addNewItem}
-            color='success'
+            className='btn-custom1'
             size='sm'
           >
             Add New
@@ -58,7 +67,7 @@ function TodoList(data) {
       isChecked = true;
       checkClass = 'bg-secondary border-secondary';
     }
-    
+
     const jsxItems = items.map(function (item) {
       return (
         <li className={`${completedClass} list-group-item`}>
@@ -67,7 +76,9 @@ function TodoList(data) {
             type='checkbox'
             checked={isChecked}
           />
-          <Link to={`/todo/${item}`}><span className='ms-3'>{item}</span></Link>
+          <Link to={`/todo/${item}`}>
+            <span className='ms-3'>{item}</span>
+          </Link>
         </li>
       );
     });
@@ -79,12 +90,24 @@ function TodoList(data) {
     if (addedItem) {
       return (
         <Row>
-          <Col><Input onChange={(event) => setNewItem(event.target.value)} /></Col>
-          <Col><Button onClick={saveItem} color="primary">Save</Button></Col>
+          <Col>
+            <InputGroup className='shadow-sm bg-white rounded mt-3'>
+              <Input
+                className='input'
+                onChange={(event) => setNewItem(event.target.value)}
+              />
+              <Button
+                onClick={saveItem}
+                className='btn-custom2'
+              >
+                Save
+              </Button>
+            </InputGroup>
+          </Col>
         </Row>
-      )
+      );
     }
-  }
+  };
 
   /*
     Immutablity: Not being to mutate the original value of something
@@ -94,7 +117,7 @@ function TodoList(data) {
 
     // Update the state holding the items array
     setItems(newItems);
-  }
+  };
 
   return (
     <section className='todo-list mt-2'>
