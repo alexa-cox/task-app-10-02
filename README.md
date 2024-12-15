@@ -1,6 +1,6 @@
 <div align="center">
 
-![Logo](/public/android-chrome-192x192.png)
+![Logo](./public/android-chrome-192x192.png)
 
 # TaskTamer <br><br><sup style="font-weight:400; font-size:16px">The best app to master your day one task at a time.</sup>
 
