@@ -1,3 +1,17 @@
+/*
+$white: #ffffff;
+$theme-colors: (
+    "light":      #e1e1e1,
+    "dark":       #212529,
+    "primary":    #638475,
+    "secondary":  #a53b60,
+    "info":       #514d5f,
+    "success":    #309b41,
+    "warning":    #eec335,
+    "danger":     #ea1d45,
+);
+*/
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -10,4 +24,32 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+.btn-custom1 {
+  background-color: #638475;
+  border: none;
+}
+
+.btn-custom1:hover {
+  background-color: #465d53;
+}
+
+.btn-custom2 {
+  background-color: #a53b60;
+  border: none;
+}
+
+.btn-custom2:hover {
+  background-color: #782b46;
+}
+
+li a {
+  color: #514d5f;
+}
+
+.input:focus {
+  border-color: rgba(165, 59, 96, 0.8);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset,
+    0 0 8px rgba(165, 59, 96, 0.6);
+  outline: 0 none;
 }
