@@ -26,6 +26,12 @@ function Navigation(args) {
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="me-auto" navbar>
+            <NavItem>
+              <NavLink href="/active-items">Active Items</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink href="/completed-items">Completed Items</NavLink>
+            </NavItem>
           </Nav>
         </Collapse>
       </Navbar>
