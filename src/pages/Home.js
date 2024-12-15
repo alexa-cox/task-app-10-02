@@ -1,5 +1,6 @@
 import React from 'react';
 import TodoList from '../features/todoList/TodoList';
+import SubHeader from '../components/SubHeader';
 
 /*
   React Component = Function that returns JSX (JavaScript XML [extensible markup language] )
@@ -25,17 +26,16 @@ import TodoList from '../features/todoList/TodoList';
 function Home() {
   return (
     <div className='App'>
+      <SubHeader current='Home' />
       <TodoList
         title='My Active List'
         showNewButton={true}
         completed={false}
-        items={['Do Laundry', 'Clean Room']}
       />
       <TodoList
         title='Completed List'
         showNewButton={false}
         completed={true}
-        items={['Take Out Trash', 'Make Dinner']}
       />
     </div>
   );

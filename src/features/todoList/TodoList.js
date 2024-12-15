@@ -11,6 +11,7 @@ import {
   Input,
   InputGroup,
 } from 'reactstrap';
+import { ACTIVE_ITEMS_KEY, COMPLETED_ITEMS_KEY } from './todoSplice';
 
 /*
   React State Management:
@@ -31,38 +32,39 @@ import {
 */
 
 // <TodoList items={[]} /> = TodoList();
-function TodoList(data) {
+function TodoList({ title, showNewButton, completed }) {
   const [addedItem, setAddedItem] = useState(false);
-  const [items, setItems] = useState(data.items);
   const [newItem, setNewItem] = useState();
+
+  // Get items based on active or completed
+  const [items, setItems] = useState(() => {
+    const key = completed ? COMPLETED_ITEMS_KEY : ACTIVE_ITEMS_KEY;
+    const savedItems = localStorage.getItem(key);
+    return savedItems ? JSON.parse(savedItems) : [];
+  });
 
   const addNewItem = () => {
     setAddedItem(true); // provide updated value as argument
-    console.log('Changing addItem to true', addedItem);
+    // console.log('Changing addItem to true', addedItem);
   };
 
-  const showButton = () => {
-    if (data.showNewButton) {
-      return (
-        <CardFooter>
-          <Button
-            onClick={addNewItem}
-            className='btn-custom1'
-            size='sm'
-          >
-            Add New
-          </Button>
-        </CardFooter>
-      );
-    }
+  const saveItem = () => {
+    const updatedItems = items.concat(newItem);
+    setItems(updatedItems);
+
+    // Update local storage
+    const key = completed ? COMPLETED_ITEMS_KEY : ACTIVE_ITEMS_KEY;
+    localStorage.setItem(key, JSON.stringify(updatedItems));
+    setNewItem('');
   };
 
+  // Render a list of items within a card
   const showItems = () => {
     // loop over items, and return an array of JSX
     let completedClass = '';
     let checkClass = '';
     let isChecked = false;
-    if (data.completed) {
+    if (completed) {
       completedClass = 'text-muted';
       isChecked = true;
       checkClass = 'bg-secondary border-secondary';
@@ -86,6 +88,7 @@ function TodoList(data) {
     return jsxItems;
   };
 
+  // Display input for adding a new item
   const showAddedItemInput = () => {
     if (addedItem) {
       return (
@@ -94,6 +97,7 @@ function TodoList(data) {
             <InputGroup className='shadow-sm bg-white rounded mt-3'>
               <Input
                 className='input'
+                value={newItem}
                 onChange={(event) => setNewItem(event.target.value)}
               />
               <Button
@@ -109,25 +113,30 @@ function TodoList(data) {
     }
   };
 
-  /*
-    Immutablity: Not being to mutate the original value of something
-  */
-  const saveItem = () => {
-    let newItems = items.concat([newItem]); // Ensure we create a brand new array
-
-    // Update the state holding the items array
-    setItems(newItems);
+  const showButton = () => {
+    if (showNewButton) {
+      return (
+        <CardFooter>
+          <Button
+            onClick={addNewItem}
+            className='btn-custom1'
+            size='sm'
+          >
+            Add New
+          </Button>
+        </CardFooter>
+      );
+    }
   };
 
   return (
     <section className='todo-list mt-2'>
-      <Card>
-        <CardHeader>{data.title}</CardHeader>
+      <Card className='mt-3'>
+        <CardHeader>{title}</CardHeader>
         <CardBody>
           <ul className='list-group list-group-flush'>{showItems()}</ul>
           {showAddedItemInput()}
         </CardBody>
-
         {showButton()}
       </Card>
     </section>

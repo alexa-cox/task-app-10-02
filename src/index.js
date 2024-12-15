@@ -9,6 +9,11 @@ import { Container } from 'reactstrap';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import TodoList from './features/todoList/TodoList';
 import TodoItem from './features/todoList/TodoItem';
+import {
+  allActiveItems,
+  allCompletedItems,
+} from './features/todoList/todoSplice';
+import SubHeader from './components/SubHeader';
 
 /*
   Preparing the React Tree into your HTML document
@@ -29,23 +34,29 @@ root.render(
         <Route
           path='/active-items'
           element={
-            <TodoList
-              title='My Active List'
-              showNewButton={true}
-              completed={false}
-              items={['Do Laundry', 'Clean Room']}
-            />
+            <>
+              <SubHeader current='Active Items' />
+              <TodoList
+                title='My Active List'
+                showNewButton={true}
+                completed={false}
+                items={allActiveItems}
+              />
+            </>
           }
         />
         <Route
           path='/completed-items'
           element={
-            <TodoList
-              title='Completed List'
-              showNewButton={false}
-              completed={true}
-              items={['Take Out Trash', 'Make Dinner']}
-            />
+            <>
+              <SubHeader current='Completed Items' />
+              <TodoList
+                title='Completed List'
+                showNewButton={false}
+                completed={true}
+                items={allCompletedItems}
+              />
+            </>
           }
         />
 
